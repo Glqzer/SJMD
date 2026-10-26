@@ -21,7 +21,7 @@ import json
 
 # --- Client -> Server -------------------------------------------------------
 JOIN_GAME = "joinGame"                    # {playerName}
-SELECT_CHARACTER = "selectCharacter"      # {character} TODO add player as well
+SELECT_CHARACTER = "selectCharacter"      # {character}
 START_GAME = "startGame"                  # {}
 MOVE_REQUEST = "moveRequest"              # {destination}
 MAKE_SUGGESTION = "makeSuggestion"        # {suspect, weapon}
@@ -40,7 +40,7 @@ INVALID_ACTION = "invalidAction"          # {reason}
 
 # --- Server -> All Clients --------------------------------------------------
 PLAYER_JOINED = "playerJoined"            # {playerName, character}
-CHARACTER_SELECTED = "characterSelected"  # {character} TODO add player as well
+CHARACTER_SELECTED = "characterSelected"  # {playerName, character}
 GAME_STARTED = "gameStarted"              # {turnOrder}
 CHARACTER_MOVED = "characterMoved"        # {character, location}
 SUGGESTION_MADE = "suggestionMade"        # {player, suspect, weapon, room}

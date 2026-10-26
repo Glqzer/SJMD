@@ -27,7 +27,12 @@ git --version
 **1. Get the code**
 
 ```sh
+# For http
 git clone https://github.com/Glqzer/SJMD.git
+
+# Or for ssh
+git clone git@github.com:Glqzer/SJMD.git
+
 cd SJMD
 ```
 
