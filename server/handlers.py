@@ -26,11 +26,36 @@ async def handle_join_game(hub, conn, payload):
 
 
 async def handle_select_character(hub, conn, payload):
-    # TODO(server): reject with INVALID_ACTION if another player already has this
-    #   character (good demo of a server -> specific client message).
-    # TODO(server): store it on hub.players[conn].character, then broadcast
-    #   PLAYER_JOINED (or characterSelected once that message is added to the SRS).
-    await hub.send(conn, INVALID_ACTION, reason="selectCharacter not implemented yet")
+    # The 6 characters
+    valid_characters = {
+            "scarlet",
+            "mustard",
+            "white",
+            "green",
+            "peacock",
+            "plum",
+    }
+
+    # Get requested character
+    character = payload.get("character")
+
+    # Validate selection exists
+    if character not in valid_characters:
+        await hub.send(conn, INVALID_ACTION, reason="Invalid character")
+        return
+
+    # Validate selection available
+    for other_conn, player in hub.players.items():
+        if other_conn != conn and player.character == character:
+            await hub.send(conn, INVALID_ACTION, reason=f"{character} is already taken")
+            return
+
+    # Save character selection to hub.players[conn].character
+    hub.players[conn].character = character
+
+    # Broadcast message
+    # PLAYER_JOINED (or characterSelected once that message is added to the SRS).
+    await hub.broadcast(CHARACTER_SELECTED, playerName=hub.players[conn].name, character=character)
 
 
 async def handle_start_game(hub, conn, payload):
