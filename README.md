@@ -103,7 +103,7 @@ windows. If `requirements.txt` changed, repeat setup step 3.
 Search the code for `TODO(` to find each one in place.
 
 **Server** (`server/handlers.py`, `server/main.py`)
-- [ ] `selectCharacter`, including rejecting a character that's already taken
+- [x] `selectCharacter`, including rejecting a character that's already taken
 - [ ] `startGame` → `gameStarted`, different `dealtHand` per player, `yourTurn`, `turnChanged`
 - [ ] `moveRequest` → `characterMoved`
 - [ ] `makeSuggestion` → `suggestionMade`, `characterMoved`, `requestDisprove` to the next player

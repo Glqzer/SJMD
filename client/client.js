@@ -62,5 +62,11 @@ document.getElementById("send-chat").onclick = () => {
   input.value = "";
 };
 
+document.querySelectorAll("#character-buttons button").forEach((button) => {
+  button.onclick = () => {
+    const character = button.dataset.character;
+    send(MSG.SELECT_CHARACTER, { character });
+  };
+});
 // TODO(client): wire up the remaining buttons added in index.html, e.g.
 //   document.getElementById("end-turn").onclick = () => send(MSG.END_TURN);
