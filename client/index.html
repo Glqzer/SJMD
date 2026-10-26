@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clue-Less (skeletal)</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; background: #f4f4f4; color: #222; }
+    h1 { margin: 0 0 8px; font-weight: 300; }
+    .row { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; align-items: center; }
+    #status { font-size: 0.9em; color: #666; }
+    #log { background: #fff; border: 1px solid #ccc; height: 420px; overflow-y: auto;
+           font-family: ui-monospace, monospace; font-size: 0.85em; padding: 8px; }
+    .out { color: #555; }
+    .private { color: #a0522d; }
+    .broadcast { color: #1d5fa8; }
+    .error { color: #b00020; }
+  </style>
+</head>
+<body>
+  <h1>Clue-Less</h1>
+  <div id="status">connecting…</div>
+
+  <div class="row">
+    <input id="name" placeholder="Player name">
+    <button id="join">Join game</button>
+  </div>
+
+  <!-- TODO(client): add controls that send the remaining client -> server messages:
+       selectCharacter (character dropdown), startGame, moveRequest (destination),
+       makeSuggestion (suspect, weapon), disproveResponse (card), makeAccusation
+       (suspect, weapon, room), endTurn. Plain buttons/dropdowns are fine for the
+       skeletal increment. Use the names in client.js MSG and send() to send them. -->
+
+  <!-- TODO(client): optional -- a simple 3x3 text board redrawn on characterMoved,
+       to show broadcasts driving the UI. -->
+
+  <div class="row">
+    <input id="chat" placeholder="Chat message" size="40">
+    <button id="send-chat">Send</button>
+  </div>
+
+  <div id="log"></div>
+
+  <script src="client.js"></script>
+</body>
+</html>
