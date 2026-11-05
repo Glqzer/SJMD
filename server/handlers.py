@@ -88,7 +88,7 @@ async def handle_start_game(hub, conn, payload):
         )
 
     # Send the turn order to all clients
-    await hub.broadcast(conn, GAME_STARTED, turnOrder=turnOrder)
+    await hub.broadcast(GAME_STARTED, turnOrder=turnOrder)
 
 
 async def handle_move_request(hub, conn, payload):
