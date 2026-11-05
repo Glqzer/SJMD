@@ -66,10 +66,10 @@ async def handle_start_game(hub, conn, payload):
     # Get all connected players
     players = list(hub.players.values())
 
-    # Ensure there's enough players. Maybe change if we add bots?
+    # Ensure there's enough players
     player_count = len(players)
-    if player_count != 6:
-        await hub.send(conn, INVALID_ACTION, reason=f"There are {player_count} player(s), need exactly 6")
+    if player_count < 2 or player_count > 6:
+        await hub.send(conn, INVALID_ACTION, reason=f"There are {player_count} player(s), should be 2-6")
         return
 
     # Create random turn order
