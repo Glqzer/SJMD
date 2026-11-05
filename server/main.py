@@ -35,6 +35,7 @@ log = logging.getLogger("clueless")
 class Player:
     name: str = ""
     character: str | None = None
+    turn_order: int = None
     # TODO(server): add status (active/eliminated) and moved_by_suggestion (SRS §2.3)
     #   when the minimal increment needs them.
 
