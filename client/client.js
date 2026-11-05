@@ -68,5 +68,9 @@ document.querySelectorAll("#character-buttons button").forEach((button) => {
     send(MSG.SELECT_CHARACTER, { character });
   };
 });
+
+document.getElementById("start-game").onclick = () =>
+  send(MSG.START_GAME, {});
+
 // TODO(client): wire up the remaining buttons added in index.html, e.g.
 //   document.getElementById("end-turn").onclick = () => send(MSG.END_TURN);

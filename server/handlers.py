@@ -14,6 +14,7 @@ Everything marked TODO(server) is open for a team member to pick up.
 """
 
 from protocol import *
+import random
 
 
 async def handle_join_game(hub, conn, payload):
@@ -59,10 +60,35 @@ async def handle_select_character(hub, conn, payload):
 
 
 async def handle_start_game(hub, conn, payload):
-    # TODO(server): broadcast GAME_STARTED {turnOrder: [player names]}, then send
-    #   each player a DEALT_HAND with a *different* canned hand (shows per-client
-    #   messages), then send YOUR_TURN to the first player and TURN_CHANGED to all.
-    await hub.send(conn, INVALID_ACTION, reason="startGame not implemented yet")
+    # TODO - Should block new players from joining the game at this point. Will also have to add code to unblock this if for some reason we don't start the game (like there aren't 6 players)
+    # block_new_joins()
+
+    # Get all connected players
+    players = list(hub.players.values())
+
+    # Ensure there's enough players. Maybe change if we add bots?
+    player_count = len(players)
+    if player_count != 6:
+        await hub.send(conn, INVALID_ACTION, reason=f"There are {player_count} player(s), need exactly 6")
+        return
+
+    # Create random turn order
+    random.shuffle(players)
+
+    # Assign turn orders
+    turnOrder = [] # This is the payload for broadcast message GAME_STARTED
+    for turn_order, player in enumerate(players, start=1):
+        player.turn_order = turn_order
+        turnOrder.append(
+            {
+                "name": player.name,
+                "character": player.character,
+                "turn_order": turn_order
+            }
+        )
+
+    # Send the turn order to all clients
+    await hub.broadcast(conn, GAME_STARTED, turnOrder=turnOrder)
 
 
 async def handle_move_request(hub, conn, payload):

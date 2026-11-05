@@ -41,7 +41,7 @@ INVALID_ACTION = "invalidAction"          # {reason}
 # --- Server -> All Clients --------------------------------------------------
 PLAYER_JOINED = "playerJoined"            # {playerName, character}
 CHARACTER_SELECTED = "characterSelected"  # {playerName, character}
-GAME_STARTED = "gameStarted"              # {turnOrder}
+GAME_STARTED = "gameStarted"              # {turnOrder} - LONTOC: I'm making this a dictionary showing each character's turn order
 CHARACTER_MOVED = "characterMoved"        # {character, location}
 SUGGESTION_MADE = "suggestionMade"        # {player, suspect, weapon, room}
 SUGGESTION_DISPROVED = "suggestionDisproved"  # {disprovingPlayer}
